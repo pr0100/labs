@@ -4,8 +4,8 @@
 #include "List.h"
 
 /*
-Стреков Станислав
-РИ - 280002
+Strelkov Stanislav
+RI - 280002
 */
 
 using namespace std;
@@ -66,7 +66,7 @@ void ListTest()
 {
 	List<int> list;
 	for (int i = 0; i < 10; i++)
-		list.push_back(i % 4);
+		list.push_back(rand() % 10);
 	list.push_back(8);
 	list.push_back(7);
 	list.push_back(-11);

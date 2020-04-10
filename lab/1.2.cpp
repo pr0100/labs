@@ -24,7 +24,6 @@ void MatrixXnX::setElement(const int i, const int j, const int value)
 
 void MatrixXnX::fillRandomElements(const int minVal, const int maxVal)
 {
-	srand(unsigned(time(0)));
 	for (int i = 0; i < dim; i++) {
 		for (int j = 0; j < dim; j++)
 			control.getMatrix()[i][j] = rand() % (maxVal - minVal) + minVal;

@@ -21,7 +21,6 @@ void Matrix3x3::setElement(const int i, const int j, const int value)
 
 void Matrix3x3::fillRandomElements(const int minVal, const int maxVal)
 {
-	srand(unsigned(time(0)));
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++)
 			matrix[i][j] = rand() % (maxVal - minVal) + minVal;

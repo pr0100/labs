@@ -20,4 +20,5 @@ public:
 	int maxColumn(const int iCol) const;
 private:
 	int matrix[3][3];
+	static constexpr int m_size = 3;
 };

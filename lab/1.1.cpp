@@ -4,8 +4,8 @@ using namespace std;
 
 Matrix3x3::Matrix3x3()
 {
-	for (int i = 0; i < 3; i++)
-		for (int j = 0; j < 3; j++)
+	for (int i = 0; i < m_size; i++)
+		for (int j = 0; j < m_size; j++)
 			matrix[i][j] = 0;
 }
 
@@ -21,8 +21,8 @@ void Matrix3x3::setElement(const int i, const int j, const int value)
 
 void Matrix3x3::fillRandomElements(const int minVal, const int maxVal)
 {
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++)
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++)
 			matrix[i][j] = rand() % (maxVal - minVal) + minVal;
 	}
 }
@@ -30,8 +30,8 @@ void Matrix3x3::fillRandomElements(const int minVal, const int maxVal)
 int Matrix3x3::sumPrincipalDiag() const
 {
 	int sumPrin = 0;
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
 			if (i == j)
 				sumPrin += matrix[i][j];
 		}
@@ -42,9 +42,9 @@ int Matrix3x3::sumPrincipalDiag() const
 int Matrix3x3::sumSecondaryDiag() const
 {
 	int sumSec = 0;
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			if (i + j == 2)
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
+			if (i + j == m_size - 1)
 				sumSec += matrix[i][j];
 		}
 	}
@@ -54,8 +54,8 @@ int Matrix3x3::sumSecondaryDiag() const
 int Matrix3x3::productPrincipalDiag() const
 {
 	int productPrin = 1;
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
 			if (i == j)
 				productPrin *= matrix[i][j];
 		}
@@ -66,9 +66,9 @@ int Matrix3x3::productPrincipalDiag() const
 int Matrix3x3::productSecondaryDiag() const
 {
 	int productSec = 1;
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
-			if (i + j == 2)
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
+			if (i + j == m_size - 1)
 				productSec *= matrix[i][j];
 		}
 	}
@@ -78,9 +78,9 @@ int Matrix3x3::productSecondaryDiag() const
 int Matrix3x3::sumRow(const int iRow) const
 {
 	int sumRow = 0;
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < m_size; i++) {
 		if (i == iRow) {
-			for (int j = 0; j < 3; j++)
+			for (int j = 0; j < m_size; j++)
 				sumRow += matrix[i][j];
 		}
 	}
@@ -90,8 +90,8 @@ int Matrix3x3::sumRow(const int iRow) const
 int Matrix3x3::minColumn(const int iCol) const
 {
 	int min = matrix[0][iCol];
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
 			if (j == iCol && matrix[i][j] < min)
 				min = matrix[i][j];
 		}
@@ -102,8 +102,8 @@ int Matrix3x3::minColumn(const int iCol) const
 int Matrix3x3::maxColumn(const int iCol) const
 {
 	int max = matrix[0][iCol];
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < 3; j++) {
+	for (int i = 0; i < m_size; i++) {
+		for (int j = 0; j < m_size; j++) {
 			if (j == iCol && matrix[i][j] > max)
 				max = matrix[i][j];
 		}

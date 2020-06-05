@@ -1,126 +1,110 @@
 #pragma once
-#include <unordered_map>
-#include <cassert>
 
-using namespace std;
-
-template<typename T>
 class List
 {
 public:
 	List();
 	~List();
-
-	void push_back(T data);
-	void pop_front();
+	void push_back(int data);
 	void deleteDuplicates();
-	T kthToLast(const int k);
-	int getSize() const { return size; }
-	T& operator[](const int index);
+	int kthToLast(const int k);
+	void print();
 
 private:
-
-	template<typename T>
 	class Node
 	{
 	public:
-		Node* pNext;
-		T data;
+		Node* tail;
+		int data;
 
-		Node(T data = T(), Node* pNext = nullptr)
+		Node(int data, Node* pNext = nullptr)
 		{
 			this->data = data;
-			this->pNext = pNext;
+			this->tail = pNext;
 		}
 	};
-	int size;
-	Node<T> *head;
+	Node *head;
 };
 
-template<typename T>
-List<T>::List()
+List::List()
 {
-	size = 0;
 	head = nullptr;
 }
 
-template<typename T>
-List<T>::~List()
+List::~List()
 {
-	while (size)
-		pop_front();
-}
-
-template<typename T>
-void List<T>::pop_front()
-{
-	Node<T> *temp = head;
-	head = head->pNext;
-	delete temp;
-	size--;
-}
-
-template<typename T>
-void List<T>::deleteDuplicates()
-{
-	Node<T>* previous = nullptr;
-	Node<T>* current = this->head;
-	unordered_map<T, int> mp;
-	while (current != nullptr)
+	while (head != nullptr)
 	{
-		if (mp.find(current->data) != mp.end())
-		{
-			mp[current->data]++;
-			previous->pNext = current->pNext;
-			current = current->pNext;
-			size--;
-		}
-		else
-		{
-			mp[current->data] = 1;
-			previous = current;
-			current = current->pNext;
-		}
+		Node* temp = head->tail;
+		delete head;
+		head = temp;
 	}
 }
 
-template<typename T>
-T List<T>::kthToLast(const int k)
-{
-	assert(size - k >= 0 && size - k < size);
-	return this->operator[](size - k);
-}
-
-template<typename T>
-void List<T>::push_back(T data)
+void List::deleteDuplicates()
 {
 	if (head == nullptr)
-	{
-		head = new Node<T>(data);
-	}
-	else
-	{
-		Node<T>* current = this->head;
-		while (current->pNext != nullptr)
-		{
-			current = current->pNext;
-		}
-		current->pNext = new Node<T>(data);
-	}
-	size++;
-}
-
-template<typename T>
-T& List<T>::operator[](const int index)
-{
-	assert(index >= 0 && index <= size);
-	int counter = 0;
-	Node<T>* current = this->head;
+		return;
+	Node* current = head;
 	while (current != nullptr)
 	{
-		if (counter == index)
-			return current->data;
-		current = current->pNext;
-		counter++;
+		Node* point = current;
+		while (point->tail != nullptr)
+		{
+			if (point->tail->data == current->data)
+				point->tail = point->tail->tail;				
+			else
+				point = point->tail;
+		}
+		current = current->tail;
+	}
+}
+
+
+int List::kthToLast(const int k)
+{
+	if (k <= 0)
+		return -1;
+	Node* point1 = head;
+	Node* point2 = head;
+	for (int i = 0; i < k - 1; i++)
+	{
+		if (point2 == nullptr)
+			return NULL;
+		point2 = point2->tail;
+	}
+	if (point2 == nullptr)
+		return NULL;
+	while (point2->tail != nullptr)
+	{
+		point1 = point1->tail;
+		point2 = point2->tail;
+	}
+	return point1->data;
+}
+
+
+void List::push_back(int data)
+{
+	if (head == nullptr)
+		head = new Node(data);
+	else
+	{
+		Node* current = this->head;
+		while (current->tail != nullptr)
+		{
+			current = current->tail;
+		}
+		current->tail = new Node(data);
+	}
+}
+
+void List::print()
+{
+	Node* temp = head;
+	while (temp != nullptr)
+	{
+		cout << temp->data << " ";
+		temp = temp->tail;
 	}
 }

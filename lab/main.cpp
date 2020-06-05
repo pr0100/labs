@@ -64,7 +64,7 @@ void MatrixXnXTest(int dim)
 
 void ListTest()
 {
-	List<int> list;
+	List list;
 	for (int i = 0; i < 10; i++)
 		list.push_back(rand() % 10);
 	list.push_back(8);
@@ -74,15 +74,13 @@ void ListTest()
 	list.push_back(5);
 	list.push_back(3);
 	cout << "Linked list with duplicates:" << endl;
-	for (int i = 0; i < list.getSize(); i++)
-		cout << list[i] << " ";
-	list.deleteDuplicates();
-	cout << "\n\n";
-	cout << "Linked list without duplicates:" << endl;
-	for (int i = 0; i < list.getSize(); i++)
-		cout << list[i] << " ";
+	list.print();
 	cout << endl;
-	cout << list.kthToLast(4);
+	list.deleteDuplicates();
+	cout << "Linked list without duplicates:" << endl;
+	list.print();
+	cout << endl;
+	cout << "5th element to last:\n" << list.kthToLast(5);
 }
 
 int main()

@@ -3,6 +3,13 @@
 
 using namespace std;
 
+void MatrixXnX::Controller::setMatrix(int iDim)
+{
+	matrix = new int* [iDim];
+	for (int i = 0; i < iDim; i++)
+		matrix[i] = new int[iDim];
+}
+
 MatrixXnX::MatrixXnX(const int iDim)
 {
 	control.setMatrix(iDim);

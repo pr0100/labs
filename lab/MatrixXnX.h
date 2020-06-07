@@ -1,29 +1,14 @@
 #pragma once
 
-#include <cstdlib>
-
-using namespace std;
-
 class MatrixXnX
 {
 public:
 	class Controller
 	{
 	public:
-		int** getMatrix() const
-		{
-			return matrix;
-		}
-
-		void setMatrix(int iDim)
-		{
-			matrix = new int* [iDim];
-			for (int i = 0; i < iDim; i++)
-				matrix[i] = new int[iDim];
-		}
-
+		int** getMatrix() const {	return matrix;	}
+		void setMatrix(int iDim);
 		~Controller() { delete[] matrix; }
-
 	private:
 		int** matrix;
 	};
@@ -40,6 +25,4 @@ public:
 	int sumRow(const int iRow) const;
 	int minColumn(const int iCol) const;
 	int maxColumn(const int iCol) const;
-private:
-
 };

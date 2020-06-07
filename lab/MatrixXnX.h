@@ -6,7 +6,7 @@ public:
 	class Controller
 	{
 	public:
-		int** getMatrix() const {	return matrix;	}
+		int** getMatrix() const { return matrix;	}
 		void setMatrix(int iDim);
 		~Controller() { delete[] matrix; }
 	private:

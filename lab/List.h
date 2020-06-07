@@ -16,12 +16,7 @@ private:
 	public:
 		Node* tail;
 		int data;
-
-		Node(int data, Node* pNext = nullptr)
-		{
-			this->data = data;
-			this->tail = pNext;
-		}
+		Node(int data, Node* pNext);
 	};
 	Node *head;
 };

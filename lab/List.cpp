@@ -3,6 +3,12 @@
 
 using namespace std;
 
+List::Node::Node(int data, Node* pNext = nullptr)
+{
+	this->data = data;
+	this->tail = pNext;
+}
+
 List::List()
 {
 	head = nullptr;
